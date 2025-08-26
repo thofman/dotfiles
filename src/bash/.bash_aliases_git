@@ -1,0 +1,7 @@
+# git aliases
+alias ga='git add'
+alias gcm='git commit -m'
+alias gp='git pull -p'
+alias gs='git status'
+alias gd='git diff'
+alias gdc='git diff --cached'
