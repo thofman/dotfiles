@@ -1,0 +1,2 @@
+# Ubuntu aliases
+alias systemupdate='sudo aptitude update && sudo aptitude full-upgrade -y && sudo apt-get autoremove --purge -y && sudo apt-get autoclean && sudo gem update && sudo gem cleanup && sudo snap refresh'

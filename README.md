@@ -14,4 +14,8 @@ Open (or add) the `~/.bash_aliases` file and add:
 if [ -f /path/to/thofman/dotfiles/src/bash/.bash_aliases_git ]; then
     source /path/to/thofman/dotfiles/src/bash/.bash_aliases_git
 fi
+
+if [ -f /path/to/thofman/dotfiles/src/bash/.bash_aliases_ubuntu; then
+    source /path/to/thofman/dotfiles/src/bash/.bash_aliases_ubuntu
+fi
 ```
