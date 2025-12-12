@@ -15,6 +15,10 @@ if [ -f /path/to/thofman/dotfiles/src/bash/.bash_aliases_git ]; then
     source /path/to/thofman/dotfiles/src/bash/.bash_aliases_git
 fi
 
+if [ -f /path/to/thofman/dotfiles/src/bash/.bash_aliases_git_ps1 ]; then
+    source /path/to/thofman/dotfiles/src/bash/.bash_aliases_git_ps1
+fi
+
 if [ -f /path/to/thofman/dotfiles/src/bash/.bash_aliases_ubuntu; then
     source /path/to/thofman/dotfiles/src/bash/.bash_aliases_ubuntu
 fi

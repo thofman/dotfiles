@@ -1,0 +1,56 @@
+# Inspired by Niket Pathak, see:
+# - https://digitalfortress.tech/tutorial/setting-up-git-prompt-step-by-step/
+# - https://github.com/niketpathak/devpreferences/blob/master/bash/.bash_profile
+#
+# But modified to my preferences
+
+# GIT_PS1_*
+GIT_PS1_HIDE_IF_PWD_IGNORED=true
+GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWCONFLICTSTATE="yes"
+GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_DESCRIBE_STYLE="branch"
+
+# Colors
+RESET_COLOR="\[\033[0m\]"
+GREY="\[\033[0;90m\]"
+BLUE="\[\033[0;34m\]"
+CYAN="\[\033[0;96m\]"
+GREEN="\[\033[00;32m\]"
+RED="\[\033[0;31m\]"
+YELLOW="\[\033[0;33m\]"
+
+function color_my_prompt {
+    local __current_date_time=$GREY$(date +"%d-%m-%Y %H:%M")
+    local __username="$BLUE\u"
+    local __full_path="$CYAN\w"
+    local __git_ps1_replacement=""
+    local __prompt_tail="$RESET_COLOR\n$"
+    local __git_branch=$(__git_ps1 "%s")
+    local __git_branch_color="$GREEN"
+    local __on_branch_text=""
+
+    # if git repository is present
+    if [[ "${__git_branch}" != "" ]]; then
+        __on_branch_text=$RESET_COLOR"on "
+    fi
+
+    # color branch name depending on state
+    # if repository is dirty or there are staged files or there are untracked files
+    if [[ "${__git_branch}" =~ "*" ]] || [[ "${__git_branch}" =~ "+" ]] || [[ "${__git_branch}" =~ "%" ]]; then
+        __git_branch_color="$RED"
+    # if branch is behind or ahead
+    elif [[ "${__git_branch}" =~ "<" ]] || [[ "${__git_branch}" =~ ">" ]]; then
+        __git_branch_color="$YELLOW"
+    fi
+
+    __git_ps1_replacement=$__on_branch_text$__git_branch_color$__git_branch
+
+    # Build the PS1 (Prompt String)
+    PS1="$__current_date_time $__username $__full_path $__git_ps1_replacement $__prompt_tail "
+}
+
+# configure PROMPT_COMMAND which is executed each time before PS1
+export PROMPT_COMMAND=color_my_prompt
